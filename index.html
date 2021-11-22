@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-wrapper">
+  <div class="alert alert-primary" role="alert">
+    Please use this link to change the default password before proceeding if this is your frist time. <br>
+    <a href="{% url 'password_reset' %}">Click here to reset</a>
+  </div>
+  <div class="container">
+    <form class="form" action="" method="POST">
+      {% csrf_token %}
+      <div class="curved-bar"></div>
+      {% for message in messages %} {% if message %}
+      <div
+        class="alert {{message.tag}}-info alert-dismissible fade show"
+        role="alert"
+        style="margin: 1rem"
+      >
+        {{message}}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endif %} {% endfor %}
+      <div class="intro">
+        <p class="text-center">
+          Kindly login with your school email and password
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="school_email">School Email</label>
+        <input
+          type="text"
+          id="school_email"
+          name="school_email"
+          class="form-control"
+          placeholder="ads30A00018@ait.edu.gh"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="********"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <button type="Submit" name="Login" class="btn">Login To Vote</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

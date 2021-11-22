@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="AIT src votting app">
+     <meta name="keywords" content="AIT votting, AIT src, Ait src voting">
+    <meta name="author" content="Francis">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Boostrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+        <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  
+    <link rel="alternate" hreflang="en" href="http://aitsrcvoting.tech">
+    <link rel="alternate" hreflang="fr" href="http://fr.aitsrcvoting.tech">
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_405dffb8b1651868fb7b2c93ccc80d822'
+        });
+    </script>
+
+    <!-- font awesome cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{% static './assets/css/styles.css' %}" />
+    <title>{% block title %} SRC PRESIDENT VOTING {% endblock title %}</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="icon">
+<!--          -->
+      </div>
+      <div class="nav-title">
+        <h2>Accra Institute of Technology</h2>
+      </div>
+      <div></div>
+    </nav>
+    <main>
+    {% if not request.get_full_path == '/comfirmation' and not request.get_full_path == '/password_reset' %}
+      <header>
+        <p class="fs-2 text-center">src president voting</p>
+      </header>
+    {% endif %}
+
+      <!-- container -->
+      {% block content %}{% endblock content %}
+    </main>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Custom sytle -->
+    <script src="{% static '/assets/js/app.js' %}"></script>
+
+    <script type="text/javascript">
+      let user = "{{request.user}}"
+
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      const csrftoken = getToken("csrftoken");
+    </script>
+    <script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite -
+      //   see more here
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", path, true);
+        ajax.send();
+        ajax.onload = function (e) {
+          var div = document.createElement("div");
+          div.className = "d-none";
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+        };
+      }
+      // this is set to BootstrapTemple website as you cannot
+      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+      // while using file:// protocol
+      // pls don't forget to change to your domain :)
+      injectSvgSprite(
+        "https://bootstraptemple.com/files/icons/orion-svg-sprite.svg"
+      );
+    </script>
+    {% comment %} Chart.js {% endcomment %}
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> {% endcomment %}
+
+  </body>
+</html>

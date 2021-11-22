@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block title %}Results{% endblock title %}
+ {% block content %}
+ 
+<div id="container" style="">
+  <canvas id="pie-chart"></canvas>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Candidate</th>
+        <th scope="col">Postion</th>
+        <th scope="col">Votes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vote in total_votes %}
+      <tr>
+        <td>{{vote.candidate}}</td>
+        <td>President</td>
+        <td>{{vote.votes}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div
+  class=""
+  style="display: flex; align-items: center; justify-content: center"
+>
+  <button type="button" class="btn btn-primary refresh">Refresh</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+<script>
+
+   var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '##e66465', '#9198e5',
+          ],
+          label: 'Population'
+        }],
+        labels: ["Text candidate 1","Text candidate 2"]
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+</script>
+{% endblock content %}

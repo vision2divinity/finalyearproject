@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Comfirm Code {% endblock title %}
+{% block content %}
+    <div class="code-wrapper">
+        <div class="container">
+            <form action="" method="POST" class="comfirmation-form">
+            {% csrf_token %}
+            {% for message in messages  %}
+                {% if message %}
+                  <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin: 1rem;">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+            {% endfor %}
+            <p class="text">Please enter code sent to your email</p>
+                <div class="form-group">
+                    <label for="code">Enter 6 digits code</label>
+                    <input type="number" name="code" id="code" class="form-control" required>
+                </div>
+                <div class="btn-container">
+                    <button id="btn" class="btn ">submit</button>
+                </div>
+            </form>        
+        <div>
+    <div>
+{% endblock content %}

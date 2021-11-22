@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% load static %} 
+{% block title %}Vote{% endblock title %} 
+{% block content %}
+<div class="container-wrapper">
+  <div class="container votting">
+    <form class="form" action="" method="POST">
+      {% csrf_token %}
+      <div class="curved-bar">
+        <span>For president</span>
+      </div>
+      <div class="intro">
+        <p class="">Vote to choose your SRC President to lead the school</p>
+        <p class="fs-4" style="font-weight: 700; text-transform: uppercase">
+          instructions
+        </p>
+        <p class="padding">
+          Select
+          <span class="bg-primary text-white" style="">&nbsp;1&nbsp;</span>
+          option from the list below.
+          <span class="text-danger">* Required</span>
+        </p>
+      </div>
+      {% for candidate in candidates %}
+      <div class="form-check form-group">
+        <input
+          data-id="{{candidate.id}}"
+          data-action="vote"
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault1"
+          value="{{candidate.id}}"
+          required
+        />
+        <div class="candidate-details">
+          <div class="img-wrapper">
+            <img
+              class="profile-pic"
+              src="{% static './assets/profile-pics/avatar.png' %}"
+              alt="{{candidate.name}}"
+            />
+          </div>
+          <div class="personal">
+            <h3 class="name">{{candidate.name}}</h3>
+            <span>{{candidate.course}}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="form-group">
+        <button type="Submit" name="Submit Ballot" class="btn">
+          Submit Ballot
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

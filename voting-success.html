@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% block title %}Success{% endblock title %} 
+{% block content %} 
+<div
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+  "
+  id="container"
+>
+{% for message in messages %} 
+    {% if message %}
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <p>{{message}}</p>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %} 
+{% endfor %}
+  <a
+    href="{% url 'results' %}"
+    class="text-info text-center btn btn-primary text-white"
+    style="margin-top: 1rem; text-decoration: none; border-radius: .7em;"
+    >Click to check results</a
+  >
+</div>
+
+{% endblock content %}
